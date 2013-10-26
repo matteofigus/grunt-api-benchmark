@@ -1,6 +1,6 @@
 /*
  * grunt-api-benchmark
- * https://github.com/mfigus/grunt-api-benchmark
+ * https://github.com/matteofigus/grunt-api-benchmark
  *
  * Copyright (c) 2013 Matteo Figus
  * Licensed under the MIT license.
