@@ -1,0 +1,25 @@
+{
+  "service": {
+    "My api": "http://localhost:3006/"
+  },
+  "endpoints": {
+    "simpleRoute": "/getJson", 
+    "secondaryRoute": "/getJson2",
+    "postRoute": {
+      "route": "/postJson",
+      "method": "post",
+      "data": {
+        "test": true,
+        "someData": "someStrings"
+      }
+    },
+    "deleteRoute": {
+      "route": "/deleteMe?test=true",
+      "method": "delete"
+    }
+  },
+  "options": {
+    "maxTime": 0.5,
+    "minSamples": 15
+  }
+}

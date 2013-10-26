@@ -1,0 +1,55 @@
+{
+  "name": "grunt-api-benchmark",
+  "description": "A grunt plugin that runs a series of benchmark tests and creates an html report",
+  "version": "0.0.1",
+  "homepage": "https://github.com/matteofigus/grunt-api-benchmark",
+  "author": {
+    "name": "Matteo Figus",
+    "email": "matteofigus@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/matteofigus/grunt-api-benchmark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matteofigus/grunt-api-benchmark/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/matteofigus/grunt-api-benchmark/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0",
+    "npm": ">=1.1.x"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "express":""
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "dependencies": {
+    "api-benchmark": ""
+  },
+  "keywords": [
+    "gruntplugin", 
+    "grunt",
+    "teamcity",
+    "benchmark",
+    "api",
+    "performance",
+    "test",
+    "load balancer",
+    "deployment",
+    "continuous delivery"
+  ]
+}
