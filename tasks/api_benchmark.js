@@ -8,8 +8,7 @@
 
 'use strict';
 
-var apiBenchmark = require('./lib/index');
-
+var apiBenchmark = require('api-benchmark');
 
 var Utils = function(grunt){
   
@@ -36,7 +35,8 @@ var Utils = function(grunt){
       return grunt.file.readJSON(inputPath);      
     },
     performBenchmark: function(inputFile, callback){
-      apiBenchmark.misure(this.getJSON(inputFile), callback);
+      var input = this.getJSON(inputFile);
+      apiBenchmark.misure(input.service, input.endpoints, input.options, callback);
     },
     saveOutput: function(output, outputFileName){
 

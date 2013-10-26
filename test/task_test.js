@@ -2,7 +2,7 @@
 
 var grunt = require('grunt');
 var path = require('path');
-var apiBenchmark = require('../tasks/lib/index');
+var apiBenchmark = require('api-benchmark');
 var TestServers = require('./fixtures/test-servers');
 
 /*
@@ -41,7 +41,7 @@ exports.task = {
   api_benchmark_should_correctly_perform_benchmarks: function(test) {
     test.expect(10);
 
-    apiBenchmark.misure(input, function(results){
+      apiBenchmark.misure(input.service, input.endpoints, input.options, function(results){
       test.notEqual(results, null);
       test.notEqual(results['My api'], null);
       test.notEqual(results['My api'].simpleRoute, null);
