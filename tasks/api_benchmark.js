@@ -8,45 +8,66 @@
 
 'use strict';
 
-var apiBenchmark = require('./lib/index')
+var apiBenchmark = require('./lib/index');
 
-module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+var Utils = function(grunt){
+  
+  var _ = grunt.util._;
 
-  grunt.registerMultiTask('api_benchmark', 'A grunt plugin that runs a series of benchmark tests and creates an html report', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+  return _.extend(this, {
+    getOutputType: function(fileName){
+      var extensionIndex = fileName.lastIndexOf("."),
+          fileHasExtension = extensionIndex >= 0,
+          fileExtension = fileHasExtension ? fileName.substr(extensionIndex + 1).toLowerCase() : 'json';
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
+      return (fileExtension == 'html' || fileExtension == 'htm') ? 'html' : 'json';
+    },
+    getJSON: function(file){
+
+      var inputPath = file.src.filter(function(filepath) {
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
           return false;
-        } else {
+        } else
           return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+      });
 
-      // Handle options.
-      src += options.punctuation;
+      return grunt.file.readJSON(inputPath);      
+    },
+    performBenchmark: function(inputFile, callback){
+      apiBenchmark.misure(this.getJSON(inputFile), callback);
+    },
+    saveOutput: function(output, outputFileName){
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+      if(this.getOutputType(outputFileName) == 'html')
+        grunt.file.write(outputFileName, 'html output');
+      else
+        grunt.file.write(outputFileName, JSON.stringify(output));
+      
+      grunt.log.writeln('File "' + outputFileName.cyan + '" created.');     
+    }
+  });
+};
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+var gruntTask = function(grunt) {
+
+  var utils = new Utils(grunt);
+
+  grunt.registerMultiTask('api_benchmark', 'A grunt plugin that runs a series of benchmark tests and creates an html report', function() {
+
+    var options = this.options({});
+
+    this.files.forEach(function(file) {
+
+      (function(inputfile, destFile){
+        utils.performBenchmark(file, function(output){
+          utils.saveOutput(output, destFile);
+        });
+      }(file, options.output + '/' + file.dest));
+
     });
   });
-
 };
+
+module.exports = gruntTask;

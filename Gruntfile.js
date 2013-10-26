@@ -22,20 +22,13 @@ module.exports = function(grunt) {
     api_benchmark: {
       default_options: {
         options: {
+          output: 'tmp'
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+          'output.json': 'test/fixtures/input.json',
+          'output.html': 'test/fixtures/input.json'
+        }
+      }
     },
 
     // Unit tests.
