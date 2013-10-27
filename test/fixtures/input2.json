@@ -1,6 +1,6 @@
 {
   "service": {
-    "My api": "http://localhost:3007/"
+    "My api": "http://localhost:3007"
   },
   "endpoints": {
     "simpleRoute": "/getJson", 

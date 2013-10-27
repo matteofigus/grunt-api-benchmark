@@ -44,7 +44,14 @@ var Utils = function(grunt){
 
       if(this.getOutputType(outputFileName) == 'html'){
         var template = grunt.file.read(path.join('tasks', 'template.html'));
-        var templateWithData = template.replace("{{ data }}", JSON.stringify(output));
+        var templateWithData = template.replace("{{ data }}", JSON.stringify({
+          benchmark: output, 
+          info: {
+            date: new Date(),
+            apiName: _.keys(output)[0]
+          }
+        }));
+                               
         grunt.file.write(outputFileName, templateWithData.replace(/\n/g, ''));
       } else
         grunt.file.write(outputFileName, JSON.stringify(output));
