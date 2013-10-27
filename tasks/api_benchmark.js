@@ -9,6 +9,7 @@
 'use strict';
 
 var apiBenchmark = require('api-benchmark');
+var path = require('path');
 
 var Utils = function(grunt){
   
@@ -41,9 +42,11 @@ var Utils = function(grunt){
     },
     saveOutput: function(output, outputFileName){
 
-      if(this.getOutputType(outputFileName) == 'html')
-        grunt.file.write(outputFileName, 'html output');
-      else
+      if(this.getOutputType(outputFileName) == 'html'){
+        var template = grunt.file.read(path.join('tasks', 'template.html'));
+        var templateWithData = template.replace("{{ data }}", JSON.stringify(output));
+        grunt.file.write(outputFileName, templateWithData.replace(/\n/g, ''));
+      } else
         grunt.file.write(outputFileName, JSON.stringify(output));
       
       grunt.log.writeln('File "' + outputFileName.cyan + '" created.');     

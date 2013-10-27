@@ -9,14 +9,12 @@ var outputDir = path.join(__dirname, '../tmp');
 exports.after_running_task = { 
   should_input_files_be_in_place: function(test) {
     test.expect(2);
-
     test.ok(grunt.file.exists(path.join(inputDir, 'input1.json')));
     test.ok(grunt.file.exists(path.join(inputDir, 'input2.json')));
     test.done();
   },
   should_the_output_files_be_produced: function(test) {
     test.expect(2);
-
     test.ok(grunt.file.exists(path.join(outputDir, 'output.json')));
     test.ok(grunt.file.exists(path.join(outputDir, 'output.html')));
     test.done();
@@ -36,6 +34,19 @@ exports.after_running_task = {
     test.notEqual(results['My api'].postRoute.stats, null);
     test.notEqual(results['My api'].deleteRoute, null);
     test.notEqual(results['My api'].deleteRoute.stats, null);
+
     test.done();    
+  },
+  should_html_output_file_contain_html: function(test){
+    test.expect(2);
+
+    var output = grunt.file.read(path.join(outputDir, 'output.html'));
+
+    test.ok(/<html>(.*?)<\/html>/i.test(output));
+
+    // data from benchmark
+    test.ok(/<script>var data=(.*?)<\/script>/i.test(output));
+
+    test.done();
   }
 };
