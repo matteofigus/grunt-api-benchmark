@@ -4,7 +4,7 @@ var grunt = require('grunt');
 var path = require('path');
 
 var inputDir = path.join(__dirname, 'fixtures');
-var outputDir = path.join(__dirname, '../tmp');
+var outputDir = path.join(__dirname, '../generated');
 
 exports.after_running_task = { 
   should_input_files_be_in_place: function(test) {

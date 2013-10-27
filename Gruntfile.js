@@ -15,14 +15,14 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['generated'],
     },
 
     // Configuration to be run (and then tested).
     api_benchmark: {
       default_options: {
         options: {
-          output: 'tmp'
+          output: 'generated'
         },
         files: {
           'output.json': 'test/fixtures/input1.json',
