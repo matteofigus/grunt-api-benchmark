@@ -25,15 +25,16 @@ module.exports = function(grunt) {
           output: 'tmp'
         },
         files: {
-          'output.json': 'test/fixtures/input.json',
-          'output.html': 'test/fixtures/input.json'
+          'output.json': 'test/fixtures/input1.json',
+          'output.html': 'test/fixtures/input2.json'
         }
       }
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js'],
+      testServersInit: ['test/test_servers_init.js'],
+      tests: ['test/*_test.js']
     },
 
   });
@@ -47,7 +48,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'api_benchmark', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'nodeunit:testServersInit', 'api_benchmark', 'nodeunit:tests']);
 
   // By default, run all tests.
   grunt.registerTask('default', ['test']);

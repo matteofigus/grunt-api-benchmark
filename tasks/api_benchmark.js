@@ -35,6 +35,7 @@ var Utils = function(grunt){
       return grunt.file.readJSON(inputPath);      
     },
     performBenchmark: function(inputFile, callback){
+      grunt.log.writeln('performing benchmarks for file: ' + inputFile.src);
       var input = this.getJSON(inputFile);
       apiBenchmark.misure(input.service, input.endpoints, input.options, callback);
     },
@@ -56,17 +57,24 @@ var gruntTask = function(grunt) {
 
   grunt.registerMultiTask('api_benchmark', 'A grunt plugin that runs a series of benchmark tests and creates an html report', function() {
 
-    var options = this.options({});
+    var done = this.async(),
+        options = this.options({}),
+        self = this,
+        callbacks = self.files.length;
+    
+    self.files.forEach(function(file) {
 
-    this.files.forEach(function(file) {
-
-      (function(inputfile, destFile){
-        utils.performBenchmark(file, function(output){
+      (function(inputFile, destFile, callback){
+        utils.performBenchmark(inputFile, function(output){
           utils.saveOutput(output, destFile);
+          callbacks--;
+          if(callbacks == 0)
+            callback();
         });
-      }(file, options.output + '/' + file.dest));
+      }(file, options.output + '/' + file.dest, done));
 
     });
+
   });
 };
 
