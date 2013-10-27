@@ -43,7 +43,7 @@ var Utils = function(grunt){
     saveOutput: function(output, outputFileName){
 
       if(this.getOutputType(outputFileName) == 'html'){
-        var template = grunt.file.read(path.join('tasks', 'template.html'));
+        var template = grunt.file.read(path.join(__dirname, 'template.html'));
         var templateWithData = template.replace("{{ data }}", JSON.stringify({
           benchmark: output, 
           info: {
