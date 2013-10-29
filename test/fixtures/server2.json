@@ -1,5 +1,6 @@
 { 
-  "name": "My api 2",
-  "port": 3007,
-  "delay": 20 
+  "My api 2": {
+    "port": 3007,
+    "delay": 20
+  }
 }

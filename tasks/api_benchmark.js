@@ -38,7 +38,7 @@ var Utils = function(grunt){
     performBenchmark: function(inputFile, callback){
       grunt.log.writeln('performing benchmarks for file: ' + inputFile.src);
       var input = this.getJSON(inputFile);
-      apiBenchmark.misure(input.service, input.endpoints, input.options, callback);
+      apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
     },
     saveOutput: function(output, outputFileName){
 
