@@ -2,7 +2,7 @@ grunt-api-benchmark
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/grunt-api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/grunt-api-benchmark)
 
-> A grunt plugin that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests, and creates an html export like [this](http://htmlpreview.github.io/?https://github.com/matteofigus/grunt-api-benchmark/blob/master/generated/output.html)! 
+> A grunt plugin that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like [this](http://htmlpreview.github.io/?https://github.com/matteofigus/grunt-api-benchmark/blob/master/generated/output.html)! 
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
