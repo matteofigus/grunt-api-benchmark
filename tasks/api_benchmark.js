@@ -8,12 +8,11 @@
 
 'use strict';
 
-var apiBenchmark = require('api-benchmark');
-var path = require('path');
-
-var Utils = function(grunt){
+var GruntApiBenchmarks = function(grunt){
   
   var _ = grunt.util._;
+  var path = require('path');
+  var apiBenchmark = require('api-benchmark');
 
   return _.extend(this, {
     getOutputType: function(fileName){
@@ -36,7 +35,7 @@ var Utils = function(grunt){
       return grunt.file.readJSON(inputPath);      
     },
     performBenchmark: function(inputFile, callback){
-      grunt.log.writeln('performing benchmarks for file: ' + inputFile.src);
+      grunt.log.writeln('Performing benchmarks for file: ' + inputFile.src);
       var input = this.getJSON(inputFile);
       apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
     },
@@ -63,7 +62,7 @@ var Utils = function(grunt){
 
 var gruntTask = function(grunt) {
 
-  var utils = new Utils(grunt);
+  var gruntApiBenchmarks = new GruntApiBenchmarks(grunt);
 
   grunt.registerMultiTask('api_benchmark', 'A grunt plugin that runs a series of benchmark tests and creates an html report', function() {
 
@@ -75,8 +74,13 @@ var gruntTask = function(grunt) {
     self.files.forEach(function(file) {
 
       (function(inputFile, destFile, callback){
-        utils.performBenchmark(inputFile, function(output){
-          utils.saveOutput(output, destFile);
+        gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
+          if(err){
+            grunt.log.error(err);
+            return callback();
+          }
+
+          gruntApiBenchmarks.saveOutput(output, destFile);
           callbacks--;
           if(callbacks == 0)
             callback();
