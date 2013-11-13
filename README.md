@@ -1,6 +1,8 @@
-grunt-api-benchmark
+grunt-api-benchmark [![Build Status](https://secure.travis-ci.org/matteofigus/grunt-api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/grunt-api-benchmark)
 =============
-[![Build Status](https://secure.travis-ci.org/matteofigus/grunt-api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/grunt-api-benchmark)
+
+[![NPM](https://nodei.co/npm/grunt-api-benchmark.png?downloads=true)](https://npmjs.org/package/grunt-api-benchmark)
+
 
 > A grunt plugin that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like [this](http://htmlpreview.github.io/?https://github.com/matteofigus/grunt-api-benchmark/blob/master/generated/output.html)! 
 
