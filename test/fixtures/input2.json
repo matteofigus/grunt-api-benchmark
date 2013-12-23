@@ -19,7 +19,8 @@
     }
   },
   "options": {
-    "maxTime": 0.5,
-    "minSamples": 15
+    "minSamples": 1000,
+    "runMode": "parallel",
+    "maxConcurrentRequests": 100
   }
 }

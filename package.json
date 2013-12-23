@@ -32,14 +32,14 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.1",
-    "http-test-servers":"0.0.5",
-    "give-me":""
+    "http-test-servers":"0.0.7",
+    "give-me":"0.0.12"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
   "dependencies": {
-    "api-benchmark": "0.0.23"
+    "api-benchmark": "0.1.7"
   },
   "keywords": [
     "gruntplugin", 
