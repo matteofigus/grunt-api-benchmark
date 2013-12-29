@@ -8,11 +8,14 @@
 
 'use strict';
 
+
+var apiBenchmark = require('api-benchmark');
+var giveMe = require('give-me');
+
 var GruntApiBenchmarks = function(grunt){
   
   var _ = grunt.util._;
   var path = require('path');
-  var apiBenchmark = require('api-benchmark');
 
   return _.extend(this, {
     getOutputType: function(fileName){
@@ -37,7 +40,13 @@ var GruntApiBenchmarks = function(grunt){
     performBenchmark: function(inputFile, callback){
       grunt.log.writeln('Performing benchmarks for file: ' + inputFile.src);
       var input = this.getJSON(inputFile);
-      apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
+      apiBenchmark.measure(input.service, input.endpoints, input.options, function(err, results){
+
+        if(err && input.options.stopOnError !== false)
+          return callback(err, null);
+        else
+          callback(null, results);
+      });
     },
     saveOutput: function(output, outputFileName){
 
@@ -60,36 +69,30 @@ var GruntApiBenchmarks = function(grunt){
   });
 };
 
-var gruntTask = function(grunt) {
+module.exports = function(grunt) {
 
   var gruntApiBenchmarks = new GruntApiBenchmarks(grunt);
+  var _ = grunt.util._;
+
+  var benchmarkFile = function(inputFile, destFile, callback){
+    gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
+      if(err){
+        grunt.log.error(err);
+        return callback();
+      }
+
+      gruntApiBenchmarks.saveOutput(output, destFile);
+      callback();
+    });
+  };
 
   grunt.registerMultiTask('api_benchmark', 'A grunt plugin that runs a series of benchmark tests and creates an html report', function() {
 
     var done = this.async(),
         options = this.options({}),
-        self = this,
-        callbacks = self.files.length;
-    
-    self.files.forEach(function(file) {
+        params = _.map(this.files, function(file){ return [file, options.output + '/' + file.dest]; });
 
-      (function(inputFile, destFile, callback){
-        gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
-          if(err){
-            grunt.log.error(err);
-            return callback();
-          }
-
-          gruntApiBenchmarks.saveOutput(output, destFile);
-          callbacks--;
-          if(callbacks == 0)
-            callback();
-        });
-      }(file, options.output + '/' + file.dest, done));
-
-    });
+    giveMe.sequence(_.bind(benchmarkFile, this), params, done);
 
   });
 };
-
-module.exports = gruntTask;

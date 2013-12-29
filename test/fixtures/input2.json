@@ -21,6 +21,8 @@
   "options": {
     "minSamples": 1000,
     "runMode": "parallel",
-    "maxConcurrentRequests": 100
+    "maxConcurrentRequests": 50,
+    "debug": true,
+    "stopOnError": false
   }
 }

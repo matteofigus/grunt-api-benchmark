@@ -1,6 +1,6 @@
 { 
   "My api": {
     "port": 3006,
-    "delay": 40 
+    "delay": 0 
   }
 }

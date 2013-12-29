@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-nodeunit": "~0.2.2",
     "grunt": "~0.4.1",
     "http-test-servers": "0.0.7",
     "give-me": "0.0.12"
@@ -39,7 +39,8 @@
     "grunt": "~0.4.1"
   },
   "dependencies": {
-    "api-benchmark": "0.1.7"
+    "api-benchmark": "0.1.21",
+    "give-me": "0.0.15"
   },
   "keywords": [
     "gruntplugin",

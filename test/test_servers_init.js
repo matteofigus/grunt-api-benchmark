@@ -26,7 +26,7 @@ exports.testServers = {
       });
     };
 
-    giveMe.all(initServer, [[input1.endpoints, server1], [input2.endpoints, server2]], function(servers){ 
+    giveMe.all(_.bind(initServer, this), [[input1.endpoints, server1], [input2.endpoints, server2]], function(servers){ 
       testServers = servers;
       test.ok(true);
       test.done();

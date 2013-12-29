@@ -19,8 +19,9 @@
     }
   },
   "options": {
-    "minSamples": 1000,
+    "minSamples": 200,
     "runMode": "parallel",
-    "maxConcurrentRequests": 100
+    "maxConcurrentRequests": 50,
+    "debug": true
   }
 }
