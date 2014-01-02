@@ -15,7 +15,8 @@
     },
     "deleteRoute": {
       "route": "/deleteMe?test=true",
-      "method": "delete"
+      "method": "delete",
+      "maxMean": 0.1
     }
   },
   "options": {
