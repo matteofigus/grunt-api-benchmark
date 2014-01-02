@@ -4,7 +4,9 @@ grunt-api-benchmark [![Build Status](https://secure.travis-ci.org/matteofigus/gr
 [![NPM](https://nodei.co/npm/grunt-api-benchmark.png?downloads=true)](https://npmjs.org/package/grunt-api-benchmark)
 
 
-> A grunt plugin that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like [this](http://htmlpreview.github.io/?https://github.com/matteofigus/grunt-api-benchmark/blob/master/generated/output.html), based on the nodejs module [api-benchmark](https://github.com/matteofigus/api-benchmark)! 
+> A grunt plugin based on the nodejs module [api-benchmark](https://github.com/matteofigus/api-benchmark) that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like this:
+
+![Plot](screen-shot.png)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -63,11 +65,11 @@ Needs to be an object containing the Name and the base http url of your api
 
 #### config.endpoints
 
-Needs to be an object containing your routes. Supports multiple verbs, data, headers, and everything. Look at [here](https://github.com/matteofigus/api-benchmark) to see more examples
+Needs to be an object containing your routes. Supports multiple verbs, data, headers, and everything. Look at [here](https://github.com/matteofigus/api-benchmark#route-object) for the full documentation
 
 #### config.options
 
-Supports a lot of options. Look at [here](https://github.com/matteofigus/api-benchmark#options) for the complete list.
+Supports a lot of options. Look at [here](https://github.com/matteofigus/api-benchmark#options-object) for the complete list.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/grunt-api-benchmark/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
