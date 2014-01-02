@@ -6,7 +6,7 @@ grunt-api-benchmark [![Build Status](https://secure.travis-ci.org/matteofigus/gr
 
 > A grunt plugin based on the nodejs module [api-benchmark](https://github.com/matteofigus/api-benchmark) that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like this:
 
-![Plot](screen-shot.png)
+![Plot](https://api-benchmark.com/images/screen-shot.png)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
