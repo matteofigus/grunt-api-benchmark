@@ -11,19 +11,17 @@
 
 var apiBenchmark = require('api-benchmark');
 var giveMe = require('give-me');
+var path = require('path');
 
 var GruntApiBenchmarks = function(grunt){
   
   var _ = grunt.util._;
-  var path = require('path');
 
   return _.extend(this, {
     getOutputType: function(fileName){
-      var extensionIndex = fileName.lastIndexOf("."),
-          fileHasExtension = extensionIndex >= 0,
-          fileExtension = fileHasExtension ? fileName.substr(extensionIndex + 1).toLowerCase() : 'json';
+      var extensionName = path.extname(fileName).toLowerCase();
 
-      return (fileExtension == 'html' || fileExtension == 'htm') ? 'html' : 'json';
+      return (extensionName == '.html' || extensionName == '.htm') ? 'html' : 'json';
     },
     getJSON: function(file){
 
@@ -40,13 +38,7 @@ var GruntApiBenchmarks = function(grunt){
     performBenchmark: function(inputFile, callback){
       grunt.log.writeln('Performing benchmarks for file: ' + inputFile.src);
       var input = this.getJSON(inputFile);
-      apiBenchmark.measure(input.service, input.endpoints, input.options, function(err, results){
-
-        if(err && input.options.stopOnError !== false)
-          return callback(err, null);
-        else
-          callback(null, results);
-      });
+      apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
     },
     saveOutput: function(output, outputFileName){
 
@@ -76,12 +68,16 @@ module.exports = function(grunt) {
 
   var benchmarkFile = function(inputFile, destFile, callback){
     gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
+
+      if(output)
+        gruntApiBenchmarks.saveOutput(output, destFile);
+
       if(err){
-        grunt.log.error(err);
+        gruntApiBenchmarks.saveOutput(err, path.join(destFile, '../errors.json'));
+        grunt.fail.warn("Various errors. See errors.json for more details.");
         return callback();
       }
-
-      gruntApiBenchmarks.saveOutput(output, destFile);
+  
       callback();
     });
   };
@@ -90,7 +86,7 @@ module.exports = function(grunt) {
 
     var done = this.async(),
         options = this.options({}),
-        params = _.map(this.files, function(file){ return [file, options.output + '/' + file.dest]; });
+        params = _.map(this.files, function(file){ return [file, path.join(options.output, file.dest)]; });
 
     giveMe.sequence(_.bind(benchmarkFile, this), params, done);
 
