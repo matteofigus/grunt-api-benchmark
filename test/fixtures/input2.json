@@ -16,13 +16,14 @@
     "deleteRoute": {
       "route": "/deleteMe?test=true",
       "method": "delete",
-      "maxMean": 0.1
+      "maxMean": 0.06,
+      "maxSingleMean": 0.003
     }
   },
   "options": {
     "minSamples": 1000,
     "runMode": "parallel",
-    "maxConcurrentRequests": 50,
+    "maxConcurrentRequests": 20,
     "debug": true,
     "stopOnError": false
   }
