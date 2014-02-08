@@ -31,14 +31,16 @@ In your project's Gruntfile, add a section named `api_benchmark` to the data obj
 ```js
 grunt.initConfig({
   api_benchmark: {
-    options: {
-      output: 'generated'
-    },
-    files: {
-      'report.html': 'config.json'
+    my_api: {
+      options: {
+        output: 'generated'
+      },
+      files: {
+        'report.html': 'config.json'
+      }
     }
-  },
-})
+  }
+});
 ```
 
 ### Options
