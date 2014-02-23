@@ -66,14 +66,16 @@ module.exports = function(grunt) {
   var gruntApiBenchmarks = new GruntApiBenchmarks(grunt);
   var _ = grunt.util._;
 
-  var benchmarkFile = function(inputFile, destFile, callback){
+  var benchmarkFile = function(inputFile, destFiles, callback){
     gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
 
       if(output)
-        gruntApiBenchmarks.saveOutput(output, destFile);
-
+        _.forEach(destFiles, function(destFile){
+          gruntApiBenchmarks.saveOutput(output, destFile);
+        });
+        
       if(err){
-        gruntApiBenchmarks.saveOutput(err, path.join(destFile, '../errors.json'));
+        gruntApiBenchmarks.saveOutput(err, path.join(destFile[0], '../errors.json'));
         grunt.fail.warn("Various errors. See errors.json for more details.");
         return callback();
       }
@@ -86,9 +88,23 @@ module.exports = function(grunt) {
 
     var done = this.async(),
         options = this.options({}),
-        params = _.map(this.files, function(file){ return [file, path.join(options.output, file.dest)]; });
+        params = [],
+        inputOutputs = {};
+
+    _.forEach(this.files, function(file){
+      if(!_.has(inputOutputs, file.src))
+        inputOutputs[file.src] = [path.join(options.output, file.dest)];
+      else
+        inputOutputs[file.src].push(path.join(options.output, file.dest));
+    });
+    
+    _.forEach(this.files, function(file){
+      if(inputOutputs[file.src]){
+        params.push([file, inputOutputs[file.src]]);
+        inputOutputs[file.src] = null;
+      }
+    });
 
     giveMe.sequence(_.bind(benchmarkFile, this), params, done);
-
   });
 };
