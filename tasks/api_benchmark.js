@@ -75,7 +75,7 @@ module.exports = function(grunt) {
         });
         
       if(err){
-        gruntApiBenchmarks.saveOutput(err, path.join(destFile[0], '../errors.json'));
+        gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'));
         grunt.fail.warn("Various errors. See errors.json for more details.");
         return callback();
       }
