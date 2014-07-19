@@ -2,12 +2,11 @@
  * grunt-api-benchmark
  * https://github.com/matteofigus/grunt-api-benchmark
  *
- * Copyright (c) 2013 Matteo Figus
+ * Copyright (c) 2013-2014 Matteo Figus
  * Licensed under the MIT license.
  */
 
 'use strict';
-
 
 var apiBenchmark = require('api-benchmark');
 var giveMe = require('give-me');
@@ -40,23 +39,19 @@ var GruntApiBenchmarks = function(grunt){
       var input = this.getJSON(inputFile);
       apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
     },
-    saveOutput: function(output, outputFileName){
+    saveOutput: function(output, outputFileName, callback){
 
       if(this.getOutputType(outputFileName) == 'html'){
-        var template = grunt.file.read(path.join(__dirname, 'template.html'));
-        var templateWithData = template.replace("{{ data }}", JSON.stringify({
-          benchmark: output, 
-          info: {
-            date: new Date(),
-            apiName: _.keys(output)[0]
-          }
-        }));
-                               
-        grunt.file.write(outputFileName, templateWithData.replace(/\n/g, ''));
-      } else
+        apiBenchmark.getHtml(output, function(err, html){
+          grunt.file.write(outputFileName, html.replace(/\n/g, ''));
+          grunt.log.writeln('File "' + outputFileName.cyan + '" created.');
+          callback();   
+        });                               
+      } else {
         grunt.file.write(outputFileName, JSON.stringify(output));
-      
-      grunt.log.writeln('File "' + outputFileName.cyan + '" created.');     
+        grunt.log.writeln('File "' + outputFileName.cyan + '" created.');   
+        callback();  
+      }
     }
   });
 };
@@ -71,16 +66,18 @@ module.exports = function(grunt) {
 
       if(output)
         _.forEach(destFiles, function(destFile){
-          gruntApiBenchmarks.saveOutput(output, destFile);
-        });
+          gruntApiBenchmarks.saveOutput(output, destFile, function(){
         
-      if(err){
-        gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'));
-        grunt.fail.warn("Various errors. See errors.json for more details.");
-        return callback();
-      }
-  
-      callback();
+            if(err){
+              gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'));
+              grunt.fail.warn("Various errors. See errors.json for more details.");
+              return callback();
+            }
+        
+            callback();
+          });
+        });
+
     });
   };
 
