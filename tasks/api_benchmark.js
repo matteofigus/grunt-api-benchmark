@@ -43,7 +43,7 @@ var GruntApiBenchmarks = function(grunt){
 
       if(this.getOutputType(outputFileName) == 'html'){
         apiBenchmark.getHtml(output, function(err, html){
-          grunt.file.write(outputFileName, html.replace(/\n/g, ''));
+          grunt.file.write(outputFileName, html);
           grunt.log.writeln('File "' + outputFileName.cyan + '" created.');
           callback();   
         });                               

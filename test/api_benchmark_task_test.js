@@ -38,15 +38,11 @@ exports.after_running_task = {
     test.done();    
   },
   should_html_output_file_contain_html: function(test){
-    test.expect(2);
+    test.expect(1);
 
     var output = grunt.file.read(path.join(outputDir, 'output.html'));
 
-    test.ok(/<html>(.*?)<\/html>/i.test(output));
-
-    // data from benchmark
-    test.ok(/<script>var data=(.*?)<\/script>/i.test(output));
-
+    test.ok(output.indexOf("<html>") >= 0);
     test.done();
   }
 };
