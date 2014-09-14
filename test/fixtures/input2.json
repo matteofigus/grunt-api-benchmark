@@ -4,13 +4,21 @@
   },
   "endpoints": {
     "simpleRoute": "/getJson", 
-    "secondaryRoute": "/getJson2",
+    "secondaryRoute": {
+      "route": "/getJson2",
+      "headers": {
+        "something": "value"
+      }
+    },
     "postRoute": {
       "route": "/postJson",
       "method": "post",
       "data": {
         "test": true,
         "someData": "someStrings"
+      },
+      "headers": {
+        "Accept-language": "*"
       }
     },
     "deleteRoute": {
