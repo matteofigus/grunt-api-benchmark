@@ -11,25 +11,23 @@
 var apiBenchmark = require('api-benchmark');
 var giveMe = require('give-me');
 var path = require('path');
+var _ = require('underscore');
 
 var GruntApiBenchmarks = function(grunt){
-  
-  var _ = grunt.util._;
 
   return _.extend(this, {
     getOutputType: function(fileName){
       var extensionName = path.extname(fileName).toLowerCase();
-
       return (extensionName == '.html' || extensionName == '.htm') ? 'html' : 'json';
     },
     getJSON: function(file){
-
       var inputPath = file.src.filter(function(filepath) {
-        if (!grunt.file.exists(filepath)) {
+        var exists = grunt.file.exists(filepath);
+
+        if(!exists)
           grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else
-          return true;
+
+        return exists;
       });
 
       return grunt.file.readJSON(inputPath);      
@@ -40,8 +38,7 @@ var GruntApiBenchmarks = function(grunt){
       apiBenchmark.measure(input.service, input.endpoints, input.options, callback);
     },
     saveOutput: function(output, outputFileName, callback){
-
-      if(this.getOutputType(outputFileName) == 'html'){
+      if(this.getOutputType(outputFileName) === 'html'){
         apiBenchmark.getHtml(output, function(err, html){
           grunt.file.write(outputFileName, html);
           grunt.log.writeln('File "' + outputFileName.cyan + '" created.');
@@ -59,7 +56,6 @@ var GruntApiBenchmarks = function(grunt){
 module.exports = function(grunt) {
 
   var gruntApiBenchmarks = new GruntApiBenchmarks(grunt);
-  var _ = grunt.util._;
 
   var benchmarkFile = function(inputFile, destFiles, callback){
     gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
@@ -70,7 +66,7 @@ module.exports = function(grunt) {
         
             if(err){
               gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'));
-              grunt.fail.warn("Various errors. See errors.json for more details.");
+              grunt.fail.warn('Various errors. See errors.json for more details.');
               return callback();
             }
         
