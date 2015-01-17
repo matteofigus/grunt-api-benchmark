@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Api Benchmark :: report</title>
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/excanvas.min.js"></script><![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/jquery.jqplot.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.highlighter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/jquery.jqplot.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/dark.min.css" type="text/css" />
+
+    <style type="text/css">
+      .jqplot-target {
+        color: #F1F1F1;
+      }
+      table.jqplot-table-legend, table.jqplot-cursor-legend {
+        background-color: rgba(101, 0, 253, 0.89)
+      }
+
+      body {
+        background: #3D3D3D;
+        color: #F1F1F1;
+      }
+
+      a {
+        color: #6699FF;
+      }
+
+      #report-details, #charts {
+        width: 100%;
+        float: left;
+        font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+      }
+
+      #report-details {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .buttons {
+        width: 100%;
+        border-bottom: 1px solid rgb(75, 72, 72);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+      }
+
+      .button {
+        margin-right: 10px;
+        padding: 6px;
+        text-decoration: none;
+      }
+
+      .button.selected {
+        background-color: rgb(56, 56, 56);
+      }
+
+      .chart {
+        width: 60%;
+        height: 450px;
+        float: left;
+      }
+
+      .panel {
+        height: 450px;
+        overflow-y: auto;
+      }
+
+      .route {
+        width: 90%;
+        margin: 3%;
+        padding: 2%;
+        float: left;
+        background-color: #000000;
+        border-radius: 15px;
+      }
+      .stats-details {
+        font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+        font-size: 15px;
+        float: left;
+        width: 36%;
+        padding: 2%;
+      }
+
+      .green {
+        color: green;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .hide {
+        display:none;
+      }
+
+      pre code {
+        overflow-x: auto;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script><!--
+    var data={"benchmark":{"My api":{"simpleRoute":{"name":"My api/simpleRoute","href":"http://localhost:3006/getJson","stats":{"sample":[0.014041658,0.004695244,0.002659742,0.003227965,0.003394301,0.002946892,0.003622623,0.002580263,0.002505065,0.002986831,0.00378799,0.002935705,0.003391588,0.002525508,0.004202637,0.002672477,0.003316296,0.002678485,0.003321418,0.002420201,0.002782475,0.003114371,0.00265707,0.00350949,0.00271863,0.002388117,0.002940169,0.00274025,0.002771475,0.003196067,0.003298711,0.002592441,0.00520229,0.002899506,0.002789416,0.002560245,0.003113672,0.003003589,0.002957016,0.002667896,0.002373532,0.002499329,0.002786906,0.003792741,0.002711022,0.002541376,0.002673926,0.002271559,0.002230327,0.004144301],"mean":0.0032368160800000005,"singleMean":0.0032368160800000005,"variance":0.0000027959960129155434,"deviation":0.0016721232050646098,"sem":0.0002364739314561139,"moe":0.00046348890565398325,"rme":14.319284574673244,"p75":0.0033175764999999998,"p95":0.004923414699999998,"p99":0.014041658,"p999":0.014041658},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-01-17T12:29:35.990Z","end":"2015-01-17T12:29:36.152Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"27","etag":"\"1930243982\"","date":"Sat, 17 Jan 2015 12:29:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson\"\n}","type":"application/json"},"hz":308.94557345377495},"secondaryRoute":{"name":"My api/secondaryRoute","href":"http://localhost:3006/getJson2","stats":{"sample":[0.003012635,0.002627618,0.002830299,0.0023603,0.002517895,0.002374434,0.002729408,0.00266649,0.002555511,0.005642267,0.002764603,0.003486031,0.003912112,0.003239107,0.0042327,0.009158372,0.005564233,0.002774825,0.002450913,0.002874232,0.00290314,0.002792822,0.002744635,0.002408298,0.002259942,0.003491732,0.00280163,0.002629528,0.002777331,0.002424018,0.00244173,0.003239038,0.002861203,0.00277596,0.002774395,0.002535695,0.002757286,0.004029927,0.002589649,0.002380768,0.002964231,0.00299074,0.003027213,0.003120808,0.003129849,0.003105678,0.003014807,0.0035567,0.003449525,0.003466997],"mean":0.0031443852,"singleMean":0.0031443852,"variance":0.0000012256594007794286,"deviation":0.001107095027890302,"sem":0.0001565668803278285,"moe":0.00030687108544254384,"rme":9.759335002675366,"p75":0.00323905525,"p95":0.0055993483,"p99":0.009158372,"p999":0.009158372},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-01-17T12:29:36.155Z","end":"2015-01-17T12:29:36.313Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","etag":"\"-251859214\"","date":"Sat, 17 Jan 2015 12:29:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson2\"\n}","type":"application/json"},"hz":318.02719336040633},"postRoute":{"name":"My api/postRoute","href":"http://localhost:3006/postJson","stats":{"sample":[0.004244956,0.003039219,0.003073265,0.003042785,0.002948551,0.002970927,0.003027313,0.003023422,0.002971709,0.002983872,0.002568016,0.002666693,0.002849084,0.003637151,0.002911179,0.002984345,0.007199615,0.00270041,0.003066124,0.002997257,0.002479732,0.002660258,0.002978127,0.002507464,0.002789139,0.002930149,0.003967317,0.003039012,0.002978246,0.003484817,0.004348069,0.010820231,0.003128288,0.003012209,0.003001671,0.002907131,0.003232204,0.003178997,0.003700777,0.002989813,0.002942192,0.002997254,0.00295709,0.00299519,0.003000708,0.002977405,0.00285946,0.002938579,0.002843308,0.003010736],"mean":0.0032912293199999997,"singleMean":0.0032912293199999997,"variance":0.0000016585737352021404,"deviation":0.0012878562556442937,"sem":0.0001821303783119192,"moe":0.0003569755414913616,"rme":10.84626766424655,"p75":0.00306790925,"p95":0.005631264699999988,"p99":0.010820231,"p999":0.010820231},"errors":{},"options":{"method":"post","concurrencyLevel":1,"start":"2015-01-17T12:29:36.314Z","end":"2015-01-17T12:29:36.480Z"},"request":{"data":{"test":true,"someData":"someStrings"}},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Sat, 17 Jan 2015 12:29:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/postJson\"\n}","type":"application/json"},"hz":303.83783771104714},"deleteRoute":{"name":"My api/deleteRoute","href":"http://localhost:3006/deleteMe?test=true","stats":{"sample":[0.003641667,0.00268965,0.003095772,0.002990249,0.003196612,0.003049244,0.003198069,0.002978447,0.003031978,0.00319805,0.002992164,0.003134003,0.002775527,0.003041086,0.003875689,0.003077582,0.002624308,0.002965659,0.008685629,0.003131601,0.0031675,0.00360557,0.003736117,0.003576825,0.003300312,0.002769373,0.003201642,0.0030221,0.00304033,0.003092016,0.003241018,0.002571699,0.002915344,0.003209778,0.003534258,0.002944527,0.003300093,0.002981213,0.00333579,0.004033952,0.003130908,0.00300564,0.002978055,0.003180646,0.002805577,0.004625319,0.006247795,0.003239056,0.003032627,0.003092784],"mean":0.0033458170000000005,"singleMean":0.0033458170000000005,"variance":9.112244110679189e-7,"deviation":0.0009545807514652277,"sem":0.00013499810451024258,"moe":0.00026459628484007543,"rme":7.908271278437386,"p75":0.0033001477500000003,"p95":0.005355433199999994,"p99":0.008685629,"p999":0.008685629},"errors":{},"options":{"method":"delete","concurrencyLevel":1,"start":"2015-01-17T12:29:36.481Z","end":"2015-01-17T12:29:36.649Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Sat, 17 Jan 2015 12:29:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/deleteMe\"\n}","type":"application/json"},"hz":298.88066203262156}}},"info":{"date":"2015-01-17T12:29:36.653Z","apiName":"My api"}};
+    // --></script>
+    <div id="report">
+      <div id="report-details"><h1>Api Benchmark report</h1></div>
+      <div id="charts"></div>
+    </div>
+    <div style="text-align: center">
+    Generated by <a href="https://github.com/matteofigus/api-benchmark" target="_blank">api-benchmark</a><br /><br />
+    <iframe src="http://ghbtns.com/github-btn.html?user=matteofigus&repo=api-benchmark&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+    </div>
+    <script>
+
+      var selectors = {
+        charts: '#charts',
+        reportDetails: '#report-details',
+        panel: '.panel',
+        panels: {
+          stats: '.stats',
+          response: '.response',
+          request: '.request'
+        },
+        button: '.button',
+        buttons: {
+          stats: '.button-stats',
+          response: '.button-response',
+          request: '.button-request'
+        }
+      };
+
+      var formatNumber = function(number) {
+        number = String(number).split('.');
+        return number[0].replace(/(?=(?:\d{3})+$)(?!\b)/g, ',') +
+          (number[1] ? '.' + number[1] : '');
+      };
+
+      var formatDate = function(date){
+        return date.replace(/T/g, ' ').replace(/Z/g, ' ');
+      };
+
+      var fixNumber = function(number, digits){
+        return formatNumber(number.toFixed(digits));
+      };
+
+      var decodeHtml = function(text){
+        return $('<div/>').text(text).html();
+      };
+
+      var templates = {
+        reportDetails: function(info){
+          var formattedDate = formatDate(info.date);
+          return 'Benchmarked ' + info.apiName + ' on ' + formattedDate;
+        },
+        route: function(routeData, i){
+          var errorsCount = 0,
+              errorsDesc = '(',
+              duration = (new Date(routeData.options.end) - new Date(routeData.options.start))/1e3;
+
+          for(var errorType in routeData.errors){
+            errorsCount += routeData.errors[errorType].length;
+            errorsDesc += routeData.errors[errorType].length + ' ' + errorType + ',';
+          }
+
+          if(errorsCount == 0)
+            errorsDesc = '';
+          else
+            errorsDesc = errorsDesc.substr(0, errorsDesc.length - 1) + ')';
+
+          var template = '<div class="route"><div class="buttons">' +
+            '<a href="#stats" class="button button-stats selected">Stats</a>' +
+            '<a href="#request" class="button button-request">Request details</a>' +
+            '<a href="#response" class="button button-response">Response details</a>' +
+            '</div><div class="stats panel"><div class="chart" id="chart' + i + '"></div>' +
+            '<div class="stats-details"><ul><li>' + routeData.stats.sample.length + ' run' +
+            (routeData.stats.sample.length > 1 ? 's' : '') + ' sampled with concurrency: ' +
+            routeData.options.concurrencyLevel + '</li>';
+
+          if(routeData.options.expectedStatusCode)
+            template += '<li>Expected status code: ' + routeData.options.expectedStatusCode + '</li>';
+
+          if(routeData.options.maxMean)
+            template += '<li>Expected max mean: ' + routeData.options.maxMean + '</li>';
+
+          if(routeData.options.maxSingleMean)
+            template += '<li>(*) Expected max mean across all concurrent requests: ' + routeData.options.maxSingleMean + '</li>';
+
+          template += '</ul><ul><li>Started: ' + formatDate(routeData.options.start) + '</li>' +
+            '<li>Ended: ' + formatDate(routeData.options.end) + ' (' + duration + ' seconds)</li>' +
+            '<li>' + fixNumber(routeData.hz, 2) + ' ops/sec \xb1 ' + fixNumber(routeData.stats.rme, 2) + '%</li>' +
+
+            '<li class="' + (!errorsCount ? 'green' : 'red') + '">' + errorsCount + ' error' +
+            (errorsCount == 1 ? '' : 's') + ' ' + errorsDesc + '</li>' +
+
+            '<li>Sample arithmetic mean: ' + fixNumber(routeData.stats.mean, 6) + '</li>';
+
+          if(routeData.options.concurrencyLevel > 1)
+            template += '<li>Mean across all the concurrent requests: ' + fixNumber(routeData.stats.singleMean, 6) + '</li>';
+
+          template += '<li>Sample standard deviation: ' + fixNumber(routeData.stats.deviation, 6) + '</li>' +
+            '<li>Margin of error: ' + fixNumber(routeData.stats.moe, 6) + '</li>' +
+            '<li>The standard error of the mean: ' + fixNumber(routeData.stats.sem, 6) + '</li>' +
+            '<li>The sample variance: ' + fixNumber(routeData.stats.variance, 6) + '</li>' +
+            '</ul><ul><li>75% Percentile: ' + fixNumber(routeData.stats.p75, 6) + '</li>' +
+            '<li>95% Percentile: ' + fixNumber(routeData.stats.p95, 6) + '</li>' +
+            '<li>99% Percentile: ' + fixNumber(routeData.stats.p99, 6) + '</li>' +
+            '<li>99.9% Percentile: ' + fixNumber(routeData.stats.p999, 6) + '</li>' +
+            '</ul></div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() + 
+            ' <a href="' + routeData.href + '" target="_blank">' + 
+            routeData.href + '</a><br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
+
+          if(routeData.options.delay)
+            template += 'Delay between bench cycles: ' + routeData.options.delay + '<br />';
+
+          var requestHeaders = 'none',
+              requestData = 'none';
+
+          if(!!routeData.request.headers)
+            requestHeaders = '<br /><pre><code>' + JSON.stringify(routeData.request.headers, undefined, 2) + '</pre></code>';
+
+          if(!!routeData.request.data)
+            requestData = '<br /><pre><code>' + JSON.stringify(routeData.request.data, undefined, 2) + '</pre></code>';
+
+          template += '<br />Headers sent: ' + requestHeaders + '<br />Data sent: ' + requestData + '<br /></div><div class="response panel hide">Data here refers to the first sampled response.<br /><br />';
+
+          var responseHeader = JSON.stringify(routeData.response.header, undefined, 2),
+              responseBody = '';
+
+          try {
+            responseBody = JSON.stringify(JSON.parse(decodeHtml(routeData.response.body)), undefined, 2);
+          } catch(e){
+            responseBody = decodeHtml(routeData.response.body);
+          }
+
+          template += 'Response status: ' + routeData.response.statusCode + '<br />Response headers:<br />' +
+            '<pre><code>' + responseHeader + '</code></pre>' +
+            '<br />Response body:<br /><pre><code>' + responseBody + '</code></pre><br /></div></div>';
+
+          return template;
+        }
+      };
+
+      var bindButtons = function(){
+        var bindButton = function(panelName){
+          $(selectors.buttons[panelName]).click(function(){
+            var $sender = $(this),
+                $panelsContainer = $sender.parent().parent();
+
+            $panelsContainer.find(selectors.button).removeClass('selected');
+            $sender.addClass('selected');
+
+            $panelsContainer.find(selectors.panel).addClass('hide');
+            $panelsContainer.find(selectors.panels[panelName]).removeClass('hide');
+
+            return false;
+          });
+        };
+
+        bindButton('stats');
+        bindButton('response');
+        bindButton('request');
+      };
+
+      $(function(){
+        $(selectors.reportDetails).append(templates.reportDetails(data.info));
+
+        var counter = 0;
+        for(serviceName in data.benchmark){
+          for(routeName in data.benchmark[serviceName]){
+            $(selectors.charts).append(templates.route(data.benchmark[serviceName][routeName], counter));
+
+            var samples = data.benchmark[serviceName][routeName]['stats']['sample'],
+                meanArray = [],
+                mean = data.benchmark[serviceName][routeName]['stats']['mean'],
+                singleMeanArray = [],
+                singleMean = data.benchmark[serviceName][routeName]['stats']['singleMean'],
+                maxMeanArray = [],
+                maxMean = data.benchmark[serviceName][routeName].options.maxMean !== undefined,
+                maxSingleMeanArray = [],
+                maxSingleMean = data.benchmark[serviceName][routeName].options.maxSingleMean !== undefined,
+                errorsArray = [],
+                areThereSomeErrors = false;
+
+            for(var i = 0; i < samples.length; i++){
+              meanArray.push(mean);
+              singleMeanArray.push(singleMean);
+
+              errorsArray.push(null);
+
+              if(maxMean)
+                maxMeanArray.push(data.benchmark[serviceName][routeName].options.maxMean);
+
+              if(maxSingleMean)
+                maxSingleMeanArray.push(data.benchmark[serviceName][routeName].options.maxSingleMean);
+            }
+
+            for(var errorType in data.benchmark[serviceName][routeName].errors){
+              var errorsOfType = data.benchmark[serviceName][routeName]['errors'][errorType];
+              for(var i = 0; i < errorsOfType.length; i++){
+                if(errorsOfType[i].pos !== undefined){
+                  errorsArray[errorsOfType[i].pos] = data.benchmark[serviceName][routeName]['stats']['sample'][errorsOfType[i].pos];
+                  areThereSomeErrors = true;
+                }
+              }
+            }
+
+            var getSeriesOptions = function(label, color){
+              return {
+                showMarker: false,
+                pointLabels: { show: true },
+                label: label,
+                color: color
+              };
+            };
+
+            var lines = [samples],
+                series = [getSeriesOptions('Samples', '#6699FF')];
+
+            if(maxMean){
+              lines.push(maxMeanArray);
+              series.push(getSeriesOptions('Max Mean', '#F90'));
+            }
+
+            lines.push(meanArray);
+            series.push(getSeriesOptions('Mean', '#66FF00'));
+
+            if(maxSingleMean){
+              lines.push(maxSingleMeanArray);
+              series.push(getSeriesOptions('Max Single Mean (*)', '#EBFF00'));
+
+              lines.push(singleMeanArray);
+              series.push(getSeriesOptions('Single mean', '#FC6333'));
+            }
+
+            if(areThereSomeErrors > 0){
+              lines.push(errorsArray);
+              series.push({
+                showLine:false,
+                markerOptions: { size: 7, style:'x' },
+                label: 'Errors',
+                color: '#FF0000'
+              });
+            }
+
+            var options = {
+              title: {
+                text: data.benchmark[serviceName][routeName]['name'],
+                color: '#F1F1F1'
+              },
+              animate: true,
+              grid: {
+                background: '#000000', textColor: '#F1F1F1'
+              },
+              seriesDefaults:{
+                rendererOptions: {
+                  showDataLabels: true
+                }
+              },
+              highlighter: {
+                show: true,
+                sizeAdjust: 7.5
+              },
+              legend: {
+                show:true,
+                location: 'se',
+                background: 'rgba(101, 0, 253, 0.89)'
+              },
+              axesDefaults: {
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+              },
+              axes: {
+                xaxis: {
+                  label: 'Samples',
+                  pad: 0
+                },
+                yaxis: {
+                  label: 'Response time (seconds)',
+                  tickOptions: {
+                    formatString:'%.6f'
+                  }
+                }
+              },
+              series: series
+            };
+
+            var plot = $.jqplot('chart' + counter, lines, options);
+            counter++;
+          }
+        }
+        hljs.initHighlightingOnLoad();
+        bindButtons();
+      });
+    </script>
+  </body>
+</html>

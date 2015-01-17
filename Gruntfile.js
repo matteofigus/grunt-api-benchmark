@@ -25,8 +25,9 @@ module.exports = function(grunt) {
           output: 'generated'
         },
         files: {
-          'output.json': 'test/fixtures/input1.json',
-          'output.html': 'test/fixtures/input2.json'
+          'output1.json': 'test/fixtures/input1.json',
+          'output1.html': 'test/fixtures/input1.json',
+          'output2.html': 'test/fixtures/input2.json'
         }
       }
     },

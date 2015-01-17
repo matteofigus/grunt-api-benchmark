@@ -61,7 +61,7 @@ module.exports = function(grunt) {
     gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
 
       if(output)
-        _.forEach(destFiles, function(destFile){
+        _.forEach(destFiles, function(destFile, i){
           gruntApiBenchmarks.saveOutput(output, destFile, function(){
         
             if(err){
@@ -69,8 +69,10 @@ module.exports = function(grunt) {
               grunt.fail.warn('Various errors. See errors.json for more details.');
               return callback();
             }
-        
-            callback();
+
+            if(i === destFiles.length - 1)
+              callback();
+
           });
         });
 

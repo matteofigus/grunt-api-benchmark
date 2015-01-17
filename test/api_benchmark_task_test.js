@@ -14,15 +14,16 @@ exports.after_running_task = {
     test.done();
   },
   should_the_output_files_be_produced: function(test) {
-    test.expect(2);
-    test.ok(grunt.file.exists(path.join(outputDir, 'output.json')));
-    test.ok(grunt.file.exists(path.join(outputDir, 'output.html')));
+    test.expect(3);
+    test.ok(grunt.file.exists(path.join(outputDir, 'output1.json')));
+    test.ok(grunt.file.exists(path.join(outputDir, 'output1.html')));
+    test.ok(grunt.file.exists(path.join(outputDir, 'output2.html')));
     test.done();
   },
   should_json_output_file_contain_benchmark_stats: function(test){
     test.expect(10);
 
-    var results = grunt.file.readJSON(path.join(outputDir, 'output.json'));
+    var results = grunt.file.readJSON(path.join(outputDir, 'output1.json'));
 
     test.notEqual(results, null);
     test.notEqual(results['My api'], null);
@@ -40,7 +41,7 @@ exports.after_running_task = {
   should_html_output_file_contain_html: function(test){
     test.expect(1);
 
-    var output = grunt.file.read(path.join(outputDir, 'output.html'));
+    var output = grunt.file.read(path.join(outputDir, 'output2.html'));
 
     test.ok(output.indexOf("<html>") >= 0);
     test.done();
