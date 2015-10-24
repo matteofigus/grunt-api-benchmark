@@ -5,7 +5,7 @@ grunt-api-benchmark
 
 ![https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png](https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png)
 
-Node version: **0.8.0** required
+Node version: **0.10.0** required
 
 Build status: [![Build Status](https://secure.travis-ci.org/matteofigus/grunt-api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/grunt-api-benchmark)
 
