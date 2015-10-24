@@ -38,7 +38,7 @@
     "grunt": "~0.4.1"
   },
   "dependencies": {
-    "api-benchmark": "0.2.1",
+    "api-benchmark": "0.2.5",
     "give-me": "0.1.0",
     "underscore": "1.7.0"
   },

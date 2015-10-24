@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Api Benchmark :: report</title>
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/excanvas.min.js"></script><![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -65,6 +66,12 @@
         float: left;
       }
 
+      .distchart {
+        width: 96%;
+        height: 450px;
+        float: left;
+      }
+
       .panel {
         height: 450px;
         overflow-y: auto;
@@ -106,7 +113,7 @@
   </head>
   <body>
     <script><!--
-    var data={"benchmark":{"My api":{"simpleRoute":{"name":"My api/simpleRoute","href":"http://localhost:3006/getJson","stats":{"sample":[0.015322155,0.005665593,0.002761922,0.003090526,0.003675786,0.002940952,0.003200511,0.002746134,0.002573286,0.004500946,0.004579535,0.002952446,0.003236046,0.002829969,0.003893092,0.002677379,0.003228058,0.002510867,0.002881628,0.002922646,0.002795392,0.003266582,0.002654703,0.00375838,0.002648278,0.002641183,0.003293506,0.00312701,0.002758749,0.003079783,0.003392695,0.00337677,0.005986683,0.003101955,0.002958315,0.002743512,0.00514372,0.002971687,0.002861051,0.002951843,0.00239352,0.002759473,0.004533161,0.004322166,0.002903279,0.002538521,0.002375914,0.003091284,0.002885187,0.004518434],"mean":0.003520444260000001,"singleMean":0.003520444260000001,"variance":0.000003568559985525297,"deviation":0.0018890632560942201,"sem":0.00026715388769491254,"moe":0.0005236216198820286,"rme":14.87373698346891,"p75":0.00346346775,"p95":0.005810083499999999,"p99":0.015322155,"p999":0.015322155},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-01-19T13:00:13.086Z","end":"2015-01-19T13:00:13.263Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"27","etag":"\"1930243982\"","date":"Mon, 19 Jan 2015 13:00:13 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson\"\n}","type":"application/json"},"hz":284.05505843742566},"secondaryRoute":{"name":"My api/secondaryRoute","href":"http://localhost:3006/getJson2","stats":{"sample":[0.003386716,0.002919731,0.002430791,0.002491475,0.002851158,0.002427879,0.002601652,0.003395991,0.003264027,0.005516458,0.004051928,0.005421348,0.00499924,0.003641958,0.003414037,0.011494555,0.005277605,0.002088089,0.00292652,0.002453861,0.002546945,0.002556885,0.002473582,0.002406406,0.002748386,0.00423554,0.004072124,0.00305506,0.002609884,0.002813723,0.002456487,0.002765816,0.002453209,0.002771472,0.002650098,0.002391841,0.002933734,0.002958915,0.003150111,0.002924606,0.002719354,0.002756332,0.002816146,0.003419763,0.003094402,0.002633824,0.002839892,0.003249409,0.004208075,0.002666156],"mean":0.0032886639200000005,"singleMean":0.0032886639200000005,"variance":0.00000206138548479228,"deviation":0.001435752584811283,"sem":0.00020304607776523438,"moe":0.0003979703124198594,"rme":12.101276448456897,"p75":0.0034005025000000003,"p95":0.0054641475,"p99":0.011494555,"p999":0.011494555},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-01-19T13:00:13.265Z","end":"2015-01-19T13:00:13.430Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","etag":"\"-251859214\"","date":"Mon, 19 Jan 2015 13:00:13 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson2\"\n}","type":"application/json"},"hz":304.0748535958639},"postRoute":{"name":"My api/postRoute","href":"http://localhost:3006/postJson","stats":{"sample":[0.002901865,0.003593363,0.001411822,0.00256922,0.001438101,0.002589144,0.003125032,0.002833007,0.003100067,0.00305053,0.003085122,0.003576506,0.003276217,0.002519636,0.003989081,0.002739882,0.008097171,0.002872729,0.002577209,0.002464366,0.002859343,0.003092534,0.002901569,0.002398149,0.002788147,0.003075733,0.003650249,0.003740346,0.002940085,0.003311008,0.004288981,0.010988968,0.003170294,0.002867665,0.002885258,0.002658073,0.002814835,0.002601178,0.002730888,0.003399261,0.002859918,0.002666986,0.002947748,0.002579694,0.002751492,0.002696262,0.004053697,0.002994673,0.002791591,0.002878985],"mean":0.0032038735999999996,"singleMean":0.0032038735999999996,"variance":0.0000020622993983904897,"deviation":0.0014360708194202992,"sem":0.0002030910829352431,"moe":0.00039805852255307646,"rme":12.424289227673542,"p75":0.00319677475,"p95":0.0060026664999999835,"p99":0.010988968,"p999":0.010988968},"errors":{},"options":{"method":"post","concurrencyLevel":1,"start":"2015-01-19T13:00:13.432Z","end":"2015-01-19T13:00:13.594Z"},"request":{"data":{"test":true,"someData":"someStrings"}},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Mon, 19 Jan 2015 13:00:13 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/postJson\"\n}","type":"application/json"},"hz":312.12217610582394},"deleteRoute":{"name":"My api/deleteRoute","href":"http://localhost:3006/deleteMe?test=true","stats":{"sample":[0.004054934,0.002649454,0.002767816,0.003031883,0.003148716,0.003300127,0.008715364,0.003535696,0.003461336,0.003683315,0.002573946,0.002948852,0.002683556,0.003162226,0.003782692,0.002913484,0.002613998,0.002856889,0.00275329,0.00282355,0.003135408,0.003365541,0.002797206,0.00219749,0.002708724,0.002799487,0.003508722,0.003177079,0.002664919,0.00309845,0.003280602,0.00304051,0.003416206,0.002775065,0.002869426,0.003554485,0.003181122,0.002835792,0.002594373,0.003555909,0.003005131,0.002825455,0.002787319,0.003305464,0.002977471,0.003536912,0.005252982,0.00393981,0.003781945,0.003624534],"mean":0.0032610932600000003,"singleMean":0.0032610932600000003,"variance":8.729277146226449e-7,"deviation":0.0009343060069498883,"sem":0.00013213082264351833,"moe":0.0002589764123812959,"rme":7.941398535204598,"p75":0.0035154655000000003,"p95":0.004594055599999995,"p99":0.008715364,"p999":0.008715364},"errors":{},"options":{"method":"delete","concurrencyLevel":1,"start":"2015-01-19T13:00:13.595Z","end":"2015-01-19T13:00:13.758Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Mon, 19 Jan 2015 13:00:13 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/deleteMe\"\n}","type":"application/json"},"hz":306.64563085816195}}},"info":{"date":"2015-01-19T13:00:13.763Z","apiName":"My api"}};
+    var data={"benchmark":{"My api":{"simpleRoute":{"name":"My api/simpleRoute","href":"http://localhost:3006/getJson","stats":{"sample":[0.016861353,0.004581891,0.003108533,0.0041786,0.003880546,0.002707741,0.003560287,0.003497026,0.004141096,0.00329325,0.004097154,0.00353108,0.004869432,0.00309227,0.002664986,0.002793232,0.002745258,0.002710388,0.0046767,0.003916226,0.003154478,0.00312244,0.003412786,0.004744884,0.003254385,0.002589039,0.002672611,0.0028378,0.003037573,0.003962353,0.00359601,0.002931055,0.004924618,0.003194767,0.003024733,0.002551757,0.003336443,0.003529854,0.003035163,0.00285606,0.003889568,0.00277906,0.003426654,0.00399801,0.003536796,0.003126425,0.002681054,0.003304713,0.003644939,0.005382577],"mean":0.003728913079999999,"singleMean":0.003728913079999999,"variance":0.0000040633803198284425,"deviation":0.0020157828057180273,"sem":0.00028507473826449236,"moe":0.000558746486998405,"rme":14.984164956679685,"p75":0.00392775775,"p95":0.0051306995499999985,"p99":0.016861353,"p999":0.016861353},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-10-24T12:51:36.638Z","end":"2015-10-24T12:51:36.825Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"27","etag":"\"1930243982\"","date":"Sat, 24 Oct 2015 12:51:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson\"\n}","type":"application/json"},"hz":268.17466069764225},"secondaryRoute":{"name":"My api/secondaryRoute","href":"http://localhost:3006/getJson2","stats":{"sample":[0.002993117,0.002941466,0.002912189,0.002946879,0.002777338,0.002699974,0.002786056,0.002730103,0.003052333,0.004748153,0.003093141,0.003084265,0.003475068,0.00314537,0.003835393,0.008635996,0.004622679,0.002936199,0.003001625,0.002975744,0.002995625,0.003093534,0.002929578,0.002934929,0.003940376,0.003072906,0.002679945,0.002835876,0.002871398,0.002979096,0.002952691,0.002679962,0.002726301,0.002979308,0.002903234,0.003118641,0.002996008,0.0036459,0.003397109,0.003106747,0.002964872,0.002980156,0.002902587,0.003243439,0.00302699,0.002952425,0.003279338,0.003709133,0.003121364,0.003055602],"mean":0.0032293631599999996,"singleMean":0.0032293631599999996,"variance":7.873276950917698e-7,"deviation":0.0008873148793363999,"sem":0.0001254852736452983,"moe":0.0002459511363447847,"rme":7.61608788355611,"p75":0.0031273655,"p95":0.0046791422999999995,"p99":0.008635996,"p999":0.008635996},"errors":{},"options":{"method":"get","concurrencyLevel":1,"start":"2015-10-24T12:51:36.828Z","end":"2015-10-24T12:51:36.990Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","etag":"\"-251859214\"","date":"Sat, 24 Oct 2015 12:51:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/getJson2\"\n}","type":"application/json"},"hz":309.6585767702881},"postRoute":{"name":"My api/postRoute","href":"http://localhost:3006/postJson","stats":{"sample":[0.004639893,0.003097654,0.003354252,0.003009217,0.003001018,0.002479148,0.002727507,0.002973791,0.003023192,0.003576012,0.002852344,0.00255762,0.003620922,0.00306921,0.0030371,0.004123066,0.002755862,0.002716572,0.002820097,0.002920822,0.001334062,0.001015131,0.002727436,0.003082827,0.006599253,0.003752271,0.003529323,0.003320841,0.003052409,0.003536698,0.004210876,0.009864422,0.003245846,0.002947826,0.002958289,0.00295884,0.002949549,0.003325708,0.00377022,0.003019246,0.003352169,0.003049315,0.003451278,0.003076333,0.002996201,0.002964129,0.003589418,0.003070229,0.003164458,0.004155905],"mean":0.00332851614,"singleMean":0.00332851614,"variance":0.0000014807056915914292,"deviation":0.0012168425089515197,"sem":0.00017208751794313434,"moe":0.0003372915351685433,"rme":10.133390405267594,"p75":0.00353116675,"p95":0.005521604999999992,"p99":0.009864422,"p999":0.009864422},"errors":{},"options":{"method":"post","concurrencyLevel":1,"start":"2015-10-24T12:51:36.991Z","end":"2015-10-24T12:51:37.159Z"},"request":{"data":{"test":true,"someData":"someStrings"}},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Sat, 24 Oct 2015 12:51:36 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/postJson\"\n}","type":"application/json"},"hz":300.4341748512597},"deleteRoute":{"name":"My api/deleteRoute","href":"http://localhost:3006/deleteMe?test=true","stats":{"sample":[0.005101071,0.002778757,0.002859661,0.002988426,0.00314768,0.002684088,0.002844173,0.002351084,0.002740103,0.009290668,0.002545388,0.00286501,0.003114838,0.003023422,0.002426713,0.00245506,0.003511858,0.00278821,0.003030745,0.003171957,0.002795598,0.003066923,0.003037557,0.003013119,0.003360979,0.002045251,0.003179146,0.003194733,0.00325176,0.003015213,0.003163454,0.003729841,0.003605589,0.002645582,0.002924557,0.003559538,0.003113234,0.003359772,0.003703822,0.003999207,0.003521388,0.003033591,0.003104102,0.003700865,0.00372003,0.004506441,0.004842067,0.003991136,0.003194658,0.002955585],"mean":0.003321073,"singleMean":0.003321073,"variance":0.0000010805236605113065,"deviation":0.001039482400289349,"sem":0.00014700501083373356,"moe":0.0002881298212341178,"rme":8.675805115820031,"p75":0.0035309255,"p95":0.004958618799999999,"p99":0.009290668,"p999":0.009290668},"errors":{},"options":{"method":"delete","concurrencyLevel":1,"start":"2015-10-24T12:51:37.160Z","end":"2015-10-24T12:51:37.327Z"},"request":{},"response":{"header":{"x-powered-by":"Express","content-type":"application/json; charset=utf-8","content-length":"28","date":"Sat, 24 Oct 2015 12:51:37 GMT","connection":"close"},"statusCode":200,"body":"{\n  \"message\": \"/deleteMe\"\n}","type":"application/json"},"hz":301.1075035086552}}},"info":{"date":"2015-10-24T12:51:37.331Z","apiName":"My api"}};
     // --></script>
     <div id="report">
       <div id="report-details"><h1>Api Benchmark report</h1></div>
@@ -124,12 +131,14 @@
         panel: '.panel',
         panels: {
           stats: '.stats',
+          distribution: '.distribution',
           response: '.response',
           request: '.request'
         },
         button: '.button',
         buttons: {
           stats: '.button-stats',
+          distribution: '.button-distribution',
           response: '.button-response',
           request: '.button-request'
         }
@@ -175,6 +184,7 @@
 
           var template = '<div class="route"><div class="buttons">' +
             '<a href="#stats" class="button button-stats selected">Stats</a>' +
+            '<a href="#distribution" class="button button-distribution">Distribution</a>' +
             '<a href="#request" class="button button-request">Request details</a>' +
             '<a href="#response" class="button button-response">Response details</a>' +
             '</div><div class="stats panel"><div class="chart" id="chart' + i + '"></div>' +
@@ -211,15 +221,17 @@
             '<li>95% Percentile: ' + fixNumber(routeData.stats.p95, 6) + '</li>' +
             '<li>99% Percentile: ' + fixNumber(routeData.stats.p99, 6) + '</li>' +
             '<li>99.9% Percentile: ' + fixNumber(routeData.stats.p999, 6) + '</li>' +
-            '</ul></div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() + 
-            ' <a href="' + routeData.href + '" target="_blank">' + 
+            '</ul></div></div><div class="distribution panel"><div class="distchart" id="distchart' + i + '">' +
+            '</div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() +
+            ' <a href="' + routeData.href + '" target="_blank">' +
             routeData.href + '</a><br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
 
           if(routeData.options.delay)
             template += 'Delay between bench cycles: ' + routeData.options.delay + '<br />';
 
           var requestHeaders = 'none',
-              requestData = 'none';
+              requestData = 'none',
+              requestQuery = 'none';
 
           if(!!routeData.request.headers)
             requestHeaders = '<br /><pre><code>' + JSON.stringify(routeData.request.headers, undefined, 2) + '</pre></code>';
@@ -227,7 +239,10 @@
           if(!!routeData.request.data)
             requestData = '<br /><pre><code>' + JSON.stringify(routeData.request.data, undefined, 2) + '</pre></code>';
 
-          template += '<br />Headers sent: ' + requestHeaders + '<br />Data sent: ' + requestData + '<br /></div><div class="response panel hide">Data here refers to the first sampled response.<br /><br />';
+          if(!!routeData.request.query)
+            requestQuery = '<br /><pre><code>' + JSON.stringify(routeData.request.query, undefined, 2) + '</pre></code>';
+
+          template += '<br />Headers sent: ' + requestHeaders + '<br />Data sent: ' + requestData + '<br />Query sent: ' + requestQuery + '<br /></div><div class="response panel hide">Data here refers to the first sampled response.<br /><br />';
 
           var responseHeader = JSON.stringify(routeData.response.header, undefined, 2),
               responseBody = '';
@@ -263,6 +278,7 @@
         };
 
         bindButton('stats');
+        bindButton('distribution');
         bindButton('response');
         bindButton('request');
       };
@@ -389,12 +405,91 @@
               series: series
             };
 
-            var plot = $.jqplot('chart' + counter, lines, options);
+            $.jqplot('chart' + counter, lines, options);
             counter++;
           }
         }
         hljs.initHighlightingOnLoad();
         bindButtons();
+      });
+
+      $(function(){
+        var counter = 0;
+        for(serviceName in data.benchmark){
+          for(routeName in data.benchmark[serviceName]){
+            var samples = data.benchmark[serviceName][routeName]['stats']['sample'];
+            var buckets = [[0.001, 0], [0.005, 0], [0.01, 0], [0.015, 0], [0.025, 0], [0.05, 0], [0.1, 0], [0.25, 0], [0.333, 0], [0.5, 0], [0.750, 0], [1.5, 0], [3, 0], [6, 0], [12, 0], [50, 0], [100, 0], [300, 0], [1000, 0]];
+            for(var i = 0; i<samples.length; i++) {
+              for (var j =0; j<buckets.length; j++) {
+                if(buckets[j][0]>= samples[i]){
+                  buckets[j][1] += 100/samples.length;
+                  break;
+                }
+              };
+            }
+
+            var distribution = [];
+            for(i =0; i<buckets.length; i++) {
+              if(buckets[i][1]){
+                distribution.push(buckets[i]);
+              }
+            }
+            var lines = [distribution],
+                series = [{
+                  showMarker: false,
+                  pointLabels: { show: true },
+                  label: 'Samples',
+                  color: '#6699FF'
+                }];
+
+            var options = {
+              title: {
+                text: data.benchmark[serviceName][routeName]['name'],
+                color: '#F1F1F1'
+              },
+              animate: true,
+              grid: {
+                background: '#000000', textColor: '#F1F1F1'
+              },
+              seriesDefaults:{
+                rendererOptions: {
+                  showDataLabels: true
+                }
+              },
+              highlighter: {
+                show: true,
+                sizeAdjust: 7.5
+              },
+              legend: {
+                show:true,
+                location: 'se',
+                background: 'rgba(101, 0, 253, 0.89)'
+              },
+              axesDefaults: {
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+              },
+              axes: {
+                xaxis: {
+                  label: 'Response time (seconds)',
+                  tickOptions: {
+                    formatString:'%.3f'
+                  }
+                },
+                yaxis: {
+                  label: 'Percent of responses',
+                  tickOptions: {
+                    formatString: '%.1f%'
+                  }
+                }
+              },
+              series: series
+            };
+
+            $.jqplot('distchart' + counter, lines, options);
+            counter++;
+          }
+        }
+        $(".distribution.panel").addClass('hide');
       });
     </script>
   </body>
