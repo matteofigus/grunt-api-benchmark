@@ -1,6 +1,8 @@
 grunt-api-benchmark 
 =============
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/matteofigus/grunt-api-benchmark.svg)](https://greenkeeper.io/)
+
 > A grunt plugin based on the nodejs module [api-benchmark](https://github.com/matteofigus/api-benchmark) that takes a config.json file like [this](https://github.com/matteofigus/grunt-api-benchmark/blob/master/test/fixtures/input2.json), makes some performance tests to your api, and creates an html export like this:
 
 ![https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png](https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png)
