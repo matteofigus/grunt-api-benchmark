@@ -59,17 +59,17 @@ module.exports = function(grunt) {
 
   var benchmarkFile = function(inputFile, destFiles, callback){
     gruntApiBenchmarks.performBenchmark(inputFile, function(err, output){
+      if(err){
+        gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'), function() {});
+        grunt.fail.warn('Various errors. See errors.json for more details.');
+        return callback();
+      }
 
       if(output){
         var c = 0;
         _.forEach(destFiles, function(destFile){
           gruntApiBenchmarks.saveOutput(output, destFile, function(){
             c++;
-            if(err){
-              gruntApiBenchmarks.saveOutput(err, path.join(destFiles[0], '../errors.json'));
-              grunt.fail.warn('Various errors. See errors.json for more details.');
-              return callback();
-            }
 
             if(c === destFiles.length)
               callback();
